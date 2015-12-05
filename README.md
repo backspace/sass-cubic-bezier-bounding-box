@@ -4,7 +4,11 @@ This is a Sass function to calculate the bounding box of a cubic bézier. I crea
 
 The calculations come from [this JSFiddle](https://jsfiddle.net/SalixAlba/QQnvm/4/) by [Salix alba](http://stackoverflow.com/a/24814530/760389).
 
-Here is an example of it in use:
+Here is a GIF of it in use:
+
+![Zooming out and in](example.gif)
+
+Here’s the Sass that produced the effect:
 
 ```scss
 $easing-control-points: 1, -0.6, 1, 1;
