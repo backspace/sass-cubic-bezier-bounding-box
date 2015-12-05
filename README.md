@@ -1,4 +1,4 @@
-# Sass Cubic Bézier Bounding Box
+# Sass Cubic Bézier Bounding Box [![Build Status](https://travis-ci.org/backspace/sass-cubic-bezier-bounding-box.svg?branch=primary)](https://travis-ci.org/backspace/sass-cubic-bezier-bounding-box)
 
 This is a Sass function to calculate the bounding box of a cubic bézier. I created because I was using an easing function to zoom into an image on hover, but the image first zooms out bit. I needed to add an initial scale on the image so the initial zoom out wouldn’t ever cause the image to become smaller than its container.
 
