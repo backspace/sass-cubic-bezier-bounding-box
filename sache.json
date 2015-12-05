@@ -1,0 +1,5 @@
+{
+  "name": "sass-cubic-bezier-bounding-box",
+  "description": "A Sass function to get the bounding box of a cubic bézier",
+  "tags": ["easing", "bounding box", "cubic bézier"]
+}
