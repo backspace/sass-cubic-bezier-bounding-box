@@ -40,3 +40,12 @@ $initial-scale: 1 - ($final-scale - 1)*$min-y;
   }
 }
 ```
+
+## Tests
+
+This is tested with [True](https://github.com/oddbird/true).
+
+```bash
+npm install
+npm test
+```
