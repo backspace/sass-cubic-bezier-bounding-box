@@ -1,0 +1,3 @@
+@function -cbbb-point-maps-from-control-list($control-points) {
+  @return ((x: 0, y: 0), (x: nth($control-points, 1), y: nth($control-points, 2)), (x: nth($control-points, 3), y: nth($control-points, 4)), (x: 1, y: 1));
+}

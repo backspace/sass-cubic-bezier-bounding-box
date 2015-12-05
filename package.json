@@ -1,0 +1,15 @@
+{
+  "name": "sass-cubic-bezier-bounding-box",
+  "version": "0.1.0",
+  "description": "A Sass function to get the bounding box of a cubic bézier",
+  "main": "scss/cbbb.scss",
+  "scripts": {
+    "test": "mocha",
+    "watch": "mocha -w --watch-extensions scss"
+  },
+  "author": "Buck Doyle <b@chromatin.ca>",
+  "license": "ISC",
+  "devDependencies": {
+    "sass-true": "^2.0.3"
+  }
+}
