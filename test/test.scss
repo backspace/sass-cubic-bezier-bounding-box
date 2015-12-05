@@ -2,12 +2,6 @@
 @import 'true';
 
 @include test-module('Utilities') {
-  @include test('-cbbb-point-maps-from-control-list') {
-    $control-points: 1, 2, 8, 9;
-
-    @include assert-equal(-cbbb-point-maps-from-control-list($control-points), ((x: 0, y: 0), (x: 1, y: 2), (x: 8, y: 9), (x: 1, y: 1)), 'generates a list of point maps from a flat list of control points');
-  }
-
   @include test('-cbbb-evaluate-at-t') {
     $axis-values: 0, -0.3, 1.2, 1;
     $t: 0.5;
