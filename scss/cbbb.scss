@@ -13,3 +13,144 @@
   $at: 1 - $t;
   @return nth($axis-values, 1)*$at*$at*$at + 3*nth($axis-values, 2)*$t*$at*$at + 3*nth($axis-values, 3)*$t*$t*$at + nth($axis-values, 4)*$t*$t*$t;
 }
+
+/*
+  function findBB() {
+    var a = 3 * P[3].X - 9 * P[2].X + 9 * P[1].X - 3 * P[0].X;
+    var b = 6 * P[0].X - 12 * P[1].X + 6 * P[2].X;
+    var c = 3 * P[1].X - 3 * P[0].X;
+
+    var disc = b * b - 4 * a * c;
+    var xl = P[0].X;
+    var xh = P[0].X;
+
+    if (P[3].X < xl) xl = P[3].X;
+    if (P[3].X > xh) xh = P[3].X;
+    if (disc >= 0) {
+      var t1 = (-b + Math.sqrt(disc)) / (2 * a);
+
+      if (t1 > 0 && t1 < 1) {
+        var x1 = evalBez(PX, t1);
+        if (x1 < xl) xl = x1;
+        if (x1 > xh) xh = x1;
+      }
+
+      var t2 = (-b - Math.sqrt(disc)) / (2 * a);
+
+      if (t2 > 0 && t2 < 1) {
+        var x2 = evalBez(PX, t2);
+        if (x2 < xl) xl = x2;
+        if (x2 > xh) xh = x2;
+      }
+    }
+
+    a = 3 * P[3].Y - 9 * P[2].Y + 9 * P[1].Y - 3 * P[0].Y;
+    b = 6 * P[0].Y - 12 * P[1].Y + 6 * P[2].Y;
+    c = 3 * P[1].Y - 3 * P[0].Y;
+
+    disc = b * b - 4 * a * c;
+    var yl = P[0].Y;
+    var yh = P[0].Y;
+    if (P[3].Y < yl) yl = P[3].Y;
+    if (P[3].Y > yh) yh = P[3].Y;
+    if (disc >= 0) {
+      var t1 = (-b + Math.sqrt(disc)) / (2 * a);
+
+      if (t1 > 0 && t1 < 1) {
+        var y1 = evalBez(PY, t1);
+        if (y1 < yl) yl = y1;
+        if (y1 > yh) yh = y1;
+      }
+
+      var t2 = (-b - Math.sqrt(disc)) / (2 * a);
+
+      if (t2 > 0 && t2 < 1) {
+        var y2 = evalBez(PY, t2);
+        if (y2 < yl) yl = y2;
+        if (y2 > yh) yh = y2;
+      }
+    }
+
+    alert("" + xl + " " + xh + " " + yl + " " + yh);
+  }
+*/
+
+// Taken from http://www.antimath.info/css/sass-sqrt-function/
+
+@function sqrt($r) {
+  $x0: 1;
+  $x1: $x0;
+
+  @for $i from 1 through 10 {
+    $x1: $x0 - ($x0 * $x0 - abs($r)) / (2 * $x0);
+    $x0: $x1;
+  }
+
+  @return $x1;
+}
+
+@function -cbbb-dimension-edges($axis-values) {
+  $p0: nth($axis-values, 1);
+  $p1: nth($axis-values, 2);
+  $p2: nth($axis-values, 3);
+  $p3: nth($axis-values, 4);
+
+  $a: 3*$p3 - 9*$p2 + 9*$p1 - 3*$p0;
+  $b: 6*$p0 - 12*$p1 + 6*$p2;
+  $c: 3*$p1 - 3*$p0;
+
+  $disc: $b*$b - 4*$a*$c;
+
+  $min: $p0;
+  $max: $p0;
+
+  @if $p3 < $min {
+    $min: $p3;
+  }
+
+  @if $p3 > $max {
+    $max: $p3;
+  }
+
+  @if $disc >= 0 {
+    $t1: (-$b + sqrt($disc))/(2*$a);
+
+    @if $t1 > 0 and $t1 < 1 {
+      $t: -cbbb-evaluate-at-t($axis-values, $t1);
+
+      @if $t < $min {
+        $min: $t;
+      }
+
+      @if $t > $max {
+        $max: $t;
+      }
+    }
+
+    $t2: (-$b - sqrt($disc))/(2*$a);
+
+    @if $t2 > 0 and $t2 < 1 {
+      $t: -cbbb-evaluate-at-t($axis-values, $t2);
+
+      @if $t < $min {
+        $min: $t;
+      }
+
+      @if $t > $max {
+        $max: $t;
+      }
+    }
+  }
+
+  @return $min, $max;
+}
+
+@function -cbbb-bounding-box-from-control-list($control-points) {
+  $xs: 0, nth($control-points, 1), nth($control-points, 3), 1;
+  $ys: 0, nth($control-points, 2), nth($control-points, 4), 1;
+
+  $x-edges: -cbbb-dimension-edges($xs);
+  $y-edges: -cbbb-dimension-edges($ys);
+
+  @return (x-min: nth($x-edges, 1), x-max: nth($x-edges, 2), y-min: nth($y-edges, 1), y-max: nth($y-edges, 2));
+}
