@@ -17,6 +17,13 @@
 
     @include assert-equal(-cbbb-bounding-box-from-control-list($control-points), $expected-bounding-box, 'generates a bounding box from a flat list of control points');
   }
+
+  @include test('-cbbb-min-max-y-from-control-list') {
+    $control-points: 0.6, -0.1, 1, 1.9;
+    $expected-min-max: -0.0036419595131606986, 1.2334019595131607;
+
+    @include assert-equal(-cbbb-min-max-y-from-control-list($control-points), $expected-min-max, 'calculates the minimum and maximum y values');
+  }
 }
 
 @include report;

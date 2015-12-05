@@ -147,3 +147,9 @@
 
   @return (x-min: nth($x-edges, 1), x-max: nth($x-edges, 2), y-min: nth($y-edges, 1), y-max: nth($y-edges, 2));
 }
+
+@function -cbbb-min-max-y-from-control-list($control-points) {
+  $bounding-box: -cbbb-bounding-box-from-control-list($control-points);
+
+  @return map-get($bounding-box, 'y-min'), map-get($bounding-box, 'y-max');
+}
