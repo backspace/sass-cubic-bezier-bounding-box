@@ -1,3 +1,7 @@
+// This is a Sass implementation of a bounding box algorithm for a cubic bezier from here:
+// http://stackoverflow.com/a/24814530/760389
+// https://jsfiddle.net/SalixAlba/QQnvm/4/
+
 @function -cbbb-evaluate-at-t($axis-values, $t) {
   $at: 1 - $t;
   @return nth($axis-values, 1)*$at*$at*$at + 3*nth($axis-values, 2)*$t*$at*$at + 3*nth($axis-values, 3)*$t*$t*$at + nth($axis-values, 4)*$t*$t*$t;
