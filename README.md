@@ -11,6 +11,8 @@ Here is a GIF of it in use:
 Here’s the Sass that produced the effect:
 
 ```scss
+@import 'cbbb';
+
 $easing-control-points: 1, -0.6, 1, 1;
 
 $final-scale: 10;
