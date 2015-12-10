@@ -10,7 +10,6 @@
   ],
   "homepage": "https://github.com/backspace/sass-cubic-bezier-bounding-box",
   "repository": "backspace/sass-cubic-bezier-bounding-box",
-  "main": "scss/cbbb.scss",
   "scripts": {
     "test": "mocha",
     "watch": "mocha -w --watch-extensions scss"
